@@ -1,30 +1,82 @@
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
-import {Link} from "react-router-dom";
 import Button from "../components/Button";
-import "./Login.css"; // tu archivo de estilos
-import {
-  FaUser,
-  FaLock,
-  FaGoogle,
-  FaFacebook,
-  FaLinkedin,
-} from "react-icons/fa";
+import "./Login.css";
+import { FaUser, FaLock, FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
 
-function Login() {
-  const [formData, setFormData] = useState({
+export function LoginForm() {
+  const [form, setForm] = useState({
     email: "",
     password: "",
+    remember: false,
   });
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  function handleChange(e) {
+    const { name, type, value, checked } = e.target;
+    setForm((f) => ({ ...f, [name]: type === "checkbox" ? checked : value }));
+  }
 
-  const handleSubmit = (e) => {
+  function validate(values) {
+    const errs = {};
+    if (!values.email) errs.email = "Email requerido";
+else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(values.email))
+  errs.email = "Email inválido";
+
+if (!values.password) errs.password = "Contraseña requerida";
+else if (values.password.length < 6) errs.password = "Mínimo 6 caracteres";
+
+  return errs;
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log("Datos del formulario:", formData);
-    // Aquí podrías agregar validación o envío al backend
-  };
+    const v = validate(form);
+    setErrors(v);
+
+    if (Object.keys(v).length === 0) {
+      // Obtenemos datos del localStorage
+     let profesionales = [];
+    let usuarios = [];
+    try {
+      profesionales = JSON.parse(localStorage.getItem("profesionales")) || [];
+      usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    } catch (error) {
+      console.error("Error al leer localStorage:", error);
+    }
+
+
+      // Buscamos coincidencia en ambos arrays
+      const user =
+  profesionales.find(
+    (p) =>
+      p.email.trim().toLowerCase() === form.email.trim().toLowerCase() &&
+      p.password === form.password
+  ) ||
+  usuarios.find(
+    (u) =>
+      u.email.trim().toLowerCase() === form.email.trim().toLowerCase() &&
+      u.password === form.password
+  );
+
+    if (user) {
+      try {
+        localStorage.setItem("usuarioActivo", JSON.stringify(user));
+      } catch (error) {
+        console.error("Error al guardar usuarioActivo:", error);
+        alert("Hubo un problema al iniciar sesión.");
+        return;
+      }
+
+    navigate("/myprofile");
+} else {
+  setErrors({ email: "Correo o contraseña incorrectos" });
+}
+
+  }
+}
+
 
   return (
     <section className="login-section">
@@ -40,11 +92,13 @@ function Login() {
               id="email"
               name="email"
               placeholder="Ingrese su email"
-              value={formData.email}
+              value={form.email}
               onChange={handleChange}
               required
             />
             <FaUser className="icon" />
+
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
           </div>
 
           <div className="box">
@@ -54,11 +108,14 @@ function Login() {
               id="password"
               name="password"
               placeholder="Ingrese su contraseña"
-              value={formData.password}
+              value={form.password}
               onChange={handleChange}
               required
             />
             <FaLock className="icon" />
+             {errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                  )}
           </div>
 
           <Link to="/recuperar-password" className="forgot-password">
@@ -106,4 +163,4 @@ function Login() {
   );
 }
 
-export default Login;
+

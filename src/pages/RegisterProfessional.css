@@ -35,34 +35,35 @@ justify-content: center;
     position: relative;
     margin: 25px 0;
 }
-    .box label {
+ .form-label {
   display: block;
   margin-left: 10px;
   margin-bottom: 6px;
-  font-size: 1rem;
+  font-size: 15px;
   font-weight: 600;
   color: #444;
-  text-align: left; /* Para que quede alineado con el input */
+  text-align: left;
 }
-.box input {
+
+
+.form-control, .inputClass {
     width: 100%;
     padding: 13px 45px 13px 15px;
     background-color: #FFF5E4;
     border-radius: 8px;
     border: none; /*duda si agrego borde o no*/
     outline: none;
-    font-size: 1rem;
+    font-size: 12px;
     color:#333;
     text-align: left;
     font-weight: 500;
   
 }
 
- 
-.box input::placeholder {
+.inputClass::placeholder {
     color: #777676;
     font-weight: 400;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
 }
 
   
@@ -82,5 +83,16 @@ justify-content: center;
 @media (max-width: 768px) {
   .panel {
     margin-top: 1.5rem;
+  
+  }
+  .row .form {
+     width: 95%; 
+   height: auto;
+  margin: 0 auto; 
+
+  }
+
+  .form-control, .inputClass {font-size: 0.9rem;   /* más chico que el default (1rem ≈ 16px) */
+  padding: 0.5rem;   
   }
 }

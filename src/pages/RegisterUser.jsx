@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./RegisterUser.css";
 import Button from "../components/Button";
 
-function RegisterUser() {
-  const [formData, setFormData] = useState({
+const initialFormUser = {
     name: "",
     surname: "",
     email: "",
@@ -12,61 +12,87 @@ function RegisterUser() {
     provincia: "",
     ciudad: "",
     telefono: "",
-  });
-
-  const [mensaje, setMensaje] = useState("");
-  const [ciudadesDisponibles, setCiudadesDisponibles] = useState([]);
-
-  const ciudadesPorProvincia = {
-    corrientes: ["Corrientes Capital", "Goya", "Ituzaingó", "Bella Vista"],
-    chaco: ["Resistencia", "Sáenz Peña", "Villa Ángela", "Charata"],
   };
 
+
+ // 🔹 Provincias y ciudades
+const PROVINCIAS_Y_CIUDADES = {
+  corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Otra"],
+  chaco: ["Resistencia", "Barranqueras", "Sáenz Peña", "Otra"],
+};
+
+
+export default function RegisterUser() {
+  const [form, setForm] = useState(initialFormUser);
+ const [errors, setErrors] = useState({});
+  const [ciudades, setCiudades] = useState([]);
+  const navigate = useNavigate();
+
+ // Actualiza ciudades al cambiar provincia
+  useEffect(() => {
+    setCiudades(PROVINCIAS_Y_CIUDADES[form.provincia] || []);
+  }, [form.provincia]);
+
+  // Manejador de cambios
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // Si cambia la provincia, actualizamos ciudades
-    if (name === "provincia") {
-      setCiudadesDisponibles(ciudadesPorProvincia[value] || []);
-      setFormData({ ...formData, provincia: value, ciudad: "" }); // reset ciudad
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
+
+ // 🔹 Validaciones centralizadas
+  const validate = (v) => {
+    const errs = {};
+    if (!v.name.trim()) errs.name = "El nombre es obligatorio.";
+    if (!v.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email))
+      errs.email = "Email inválido.";
+    if (v.password.length < 6)
+      errs.password = "La contraseña debe tener al menos 6 caracteres.";
+    if (!v.provincia) errs.provincia = "Seleccioná una provincia.";
+    if (!v.ciudad) errs.ciudad = "Seleccioná una ciudad.";
+    
+   
+    return errs;
+  };
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
+   const v = validate(form);
+    setErrors(v);
 
-    if (
-      !formData.name ||
-      !formData.surname ||
-      !formData.email ||
-      !formData.password ||
-      !formData.provincia ||
-      !formData.ciudad
-    ) {
-      setMensaje("⚠️ Por favor completá todos los campos obligatorios.");
-      return;
+    if (Object.keys(v).length === 0) {
+      const nuevoUsuario = { id: Date.now(), ...form, tipo: "usuario"};
+
+ // Guardar en localStorage
+let usuarios = [];
+try {
+  usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+} catch (error) {
+  console.error("Error al leer usuarios del localStorage:", error);
+}
+
+
+      // Guardar como usuario activo
+   usuarios.push(nuevoUsuario);
+
+try {
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  localStorage.setItem("usuarioActivo", JSON.stringify(nuevoUsuario));
+} catch (error) {
+  console.error("Error al guardar en localStorage:", error);
+  alert("Hubo un problema al guardar los datos. Intenta de nuevo.");
+  return; // salimos para no navegar si falló
+}
+
+      alert("Usuario registrado con éxito ✅");
+      navigate("/myprofile");
     }
-
-    const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-    usuariosGuardados.push(formData);
-    localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
-
-    setMensaje("✅ Registro exitoso. ¡Bienvenido/a!");
-    setFormData({
-      name: "",
-      surname: "",
-      email: "",
-      password: "",
-      provincia: "",
-      ciudad: "",
-      telefono: "",
-    });
-    setCiudadesDisponibles([]);
   };
-
+    
+    // Función auxiliar para mostrar errores
+  const inputClass = (field) =>
+    `form-control ${errors[field] ? "is-invalid" : ""}`;
   return (
     <section className="login-section container my-5">
       <div className="login-box">
@@ -74,35 +100,39 @@ function RegisterUser() {
 
         <form className="registerclient-form" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">
+            <label htmlFor="nombre" className="form-label">
               Nombre
             </label>
             <input
               type="text"
-              id="name"
+              id="nombre"
               name="name"
-              className="form-control"
+            className={`form-control ${errors.email ? "is-invalid" : ""}`}
+
               placeholder="Ingrese su nombre"
-              value={formData.name}
+              value={form.name}
               onChange={handleChange}
               required
             />
+             {errors.name  && <div className="invalid-feedback">{errors.name}</div>}
+
           </div>
 
           <div className="mb-3">
-            <label htmlFor="surname" className="form-label">
+            <label htmlFor="apellido" className="form-label">
               Apellido
             </label>
             <input
               type="text"
-              id="surname"
+              id="apellido"
               name="surname"
-              className="form-control"
-              placeholder="Ingrese su apellido"
-              value={formData.surname}
+           placeholder="Ingrese su apellido"
+              className={inputClass("surname")}
+              value={form.surname}
               onChange={handleChange}
               required
             />
+             {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
           </div>
 
           <div className="mb-3">
@@ -113,12 +143,13 @@ function RegisterUser() {
               type="email"
               id="email"
               name="email"
-              className="form-control"
+                 className={inputClass("email")}
               placeholder="Ingrese su email"
-              value={formData.email}
+              value={form.email}
               onChange={handleChange}
               required
             />
+            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
           </div>
 
           <div className="mb-3">
@@ -129,12 +160,15 @@ function RegisterUser() {
               type="password"
               id="password"
               name="password"
-              className="form-control"
+                   className={inputClass("password")}
               placeholder="Ingrese su contraseña"
-              value={formData.password}
+              value={form.password}
               onChange={handleChange}
               required
             />
+             {errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                  )}
           </div>
 
           <div className="mb-3">
@@ -144,8 +178,8 @@ function RegisterUser() {
             <select
               id="provincia"
               name="provincia"
-              className="form-select"
-              value={formData.provincia}
+               className={inputClass("provincia")}
+              value={form.provincia}
               onChange={handleChange}
               required
             >
@@ -153,6 +187,9 @@ function RegisterUser() {
               <option value="corrientes">Corrientes</option>
               <option value="chaco">Chaco</option>
             </select>
+            {errors.provincia && (
+                    <div className="invalid-feedback">{errors.provincia}</div>
+                  )}
           </div>
 
           <div className="mb-3">
@@ -162,19 +199,22 @@ function RegisterUser() {
             <select
               id="ciudad"
               name="ciudad"
-              className="form-select"
-              value={formData.ciudad}
+             className={inputClass("ciudad")}
+              value={form.ciudad}
               onChange={handleChange}
               required
-              disabled={!ciudadesDisponibles.length}
+              disabled={!form.provincia}
             >
               <option value="">-- Seleccioná una ciudad --</option>
-              {ciudadesDisponibles.map((ciudad) => (
-                <option key={ciudad} value={ciudad}>
+              {ciudades.map((ciudad, index) => (
+                <option key={index} value={ciudad}>
                   {ciudad}
                 </option>
               ))}
             </select>
+             {errors.ciudad && (
+                    <div className="invalid-feedback">{errors.ciudad}</div>
+                  )}
           </div>
 
           <div className="mb-3">
@@ -186,26 +226,22 @@ function RegisterUser() {
               id="telefono"
               name="telefono"
               className="form-control"
-              placeholder="Ingrese su teléfono"
-              value={formData.telefono}
+            
+              value={form.telefono}
               onChange={handleChange}
+               placeholder="Ej: 3794123456"
+                  pattern="[0-9]{10}"
+                  title="Debe ingresar 10 números"
             />
           </div>
 
         </form>
 
-         <Button  type="submit" variant="gradient" size="md"   fullWidth disabled={
-    !formData.name ||
-    !formData.surname ||
-    !formData.email ||
-    !formData.password ||
-    !formData.provincia ||
-    !formData.ciudad
-  }
+         <Button  type="submit" variant="gradient" size="md" 
 >
   Crear cuenta
 </Button>
-        {mensaje && <p className="mt-3 text-success">{mensaje}</p>}
+
   <Button className= "text-dark" to="/" variant="outline" size="md" >Volver atrás </Button>
 
       </div>
@@ -226,6 +262,3 @@ function RegisterUser() {
     </section>
   );
 }
-
-export default RegisterUser;
- 

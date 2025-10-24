@@ -1,4 +1,21 @@
+ .registerclient-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos columnas */
+  gap: 8px 12px; 
+ width: 100%;
+    padding: 0 25px;
+ 
+}
 
+/* Inputs o botones que deben ocupar todo el ancho */
+.registerclient-form .full-width {
+  grid-column: span 2;
+  width: 100%;
+}
+
+  .registerclient-form .box {
+    margin: 6px 0; /
+  }
 
 
 .login-section{
@@ -25,10 +42,7 @@ overflow: hidden;}
     z-index: 1;
 }
 
-#login-form {
-    width: 100%;
-    padding: 0 25px;
-}
+
 
 .login-box h1 {
    font-size: 32px;
@@ -40,16 +54,16 @@ overflow: hidden;}
     position: relative;
     margin: 25px 0;
 }
-    .box label {
+    .form-label {
   display: block;
   margin-left: 10px;
-  margin-bottom: 6px;
+  margin-bottom: 0;
   font-size: 15px;
   font-weight: 600;
   color: #444;
   text-align: left; /* Para que quede alineado con el input */
 }
-.box input {
+.form-control, .inputClass {
     width: 100%;
     padding: 13px 45px 13px 15px;
     background-color: #FFF5E4;
@@ -63,34 +77,12 @@ overflow: hidden;}
   
 }
 
-.box input::placeholder {
+.inputClass::placeholder {
     color: #777676;
     font-weight: 400;
     font-size: 0.8rem;
 }
 
-.box i {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(0%);
-    color: #777676;
-    font-size: 18px;
-    pointer-events: none; }
-
-.forgot-password {
-    display: block;
-    margin: 15px 0 15px;
-    font-size:  15px;
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-transition: color 0.3s;
-}
-.forgot-password:hover {
-  color: #FFA725;
-  text-decoration: underline;
-}
 
 
 .login-section p {
@@ -100,29 +92,7 @@ transition: color 0.3s;
     color: #333;
 }
 
-.social-login {
-    display: flex;
-    justify-content: center;
-    gap: 15px   ;
-    margin-top: 10px;
-}
-.social-login a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
-  border: 2px solid #FFA725;
-  border-radius: 50%;
-  font-size: 20px;
-  color: #333;
-  transition: 0.3s;
-}
 
-.social-login a:hover {
-  background-color: #FFA725;
-  color: #fff;
-}
 
 .side-panel{
     position: absolute;
@@ -155,74 +125,18 @@ transition: color 0.3s;
     font-weight: 600;
     color: #333;
 }
+.registerclient-form input,
+.registerclient-form select {
+  font-size: 0.9rem;   /* más chico que el default (1rem ≈ 16px) */
+  padding: 0.5rem;     /* opcional: ajusta el padding para que no se vean desproporcionados */}
 
-.side-panel .btn {
-   width: 100%;
-    height: 45px;
-    background-color: #FFA725;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #FFF5E4;
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
-
-.side-panel .btn:hover {
-    background-color: #ffbc58; }
-
-    .registerclient-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* dos columnas */
-  gap: 8px 12px; 
- width: 100%;
-    padding: 0 25px;
- 
-}
-
-/* Inputs o botones que deben ocupar todo el ancho */
-.registerclient-form .full-width {
-  grid-column: span 2;
-  width: 100%;
-}
-.registerclient-form .box label {
-  margin-bottom: 4px; /* antes quizá tenías 6px o más */
-  font-size: 14px; }
-  .registerclient-form .box {
-    margin: 6px 0; /
-  }
-
-.registerclient-form .box input,
-.registerclient-form .box select,
-.registerclient-form .box textarea {
-  width: 100%;
-  padding: 8px;
-  font-size: 14px;}
-
-  .registerclient-form .form-control,
-  .registerclient-form .form-select
-   {
-  font-size: 0.85rem;
-}
-
-.registerclient-form button {
-  justify-content: end; /* empuja el botón al fondo */
-}
-
-
-  @media (max-width: 768px) {
-  .registerclient-form {
-    grid-template-columns: 1fr; /* solo 1 columna */
-  }
-
-  .registerclient-form .full-width {
-    grid-column: span 1; /* ocupa toda la fila en 1 columna */
-  }
   
-}
-  @media (max-width: 900px) {
+  
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
   .login-section {
     flex-direction: column;       /* apila panel e inputs */
     width: 95%;                   /* ocupa casi todo el ancho */
@@ -231,52 +145,10 @@ transition: color 0.3s;
     overflow: hidden;
   }
 
-  .login-box,
-  .side-panel {
-    position: static;             /* quita absolute para que fluyan */
-    width: 100%;                  /* cada uno ocupa todo el ancho */
-    height: auto;
-  }
-
-  .login-box {
-    padding: 20px;
-    order: 2;                     /* formulario debajo del panel */
-  }
-
-  .side-panel {
-    padding: 20px;
-    order: 1;                     /* panel arriba */
-    text-align: center;
-  }
-
-  .login-box h1 {
-    font-size: 24px;
-  }
-
-  .box input,
-  .box select,
-  .box textarea {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  }
-.registerclient-form input,
-.registerclient-form select {
-  font-size: 0.9rem;   /* más chico que el default (1rem ≈ 16px) */
-  padding: 0.5rem;     /* opcional: ajusta el padding para que no se vean desproporcionados */
-}
 
 
-/* Responsive */
-@media (max-width: 768px) {
-  .register-professional .login-section.professional {
-    flex-direction: column;
-    width: 100%;
-    border-radius: 0;
-  }
-
-  .register-professional .login-box {
+.login-box {
+  position: static; 
     width: 100%;
     height: auto;
     margin: 10px 0 0 0;
@@ -287,19 +159,23 @@ transition: color 0.3s;
     flex-direction: column;
   align-items: center; }
 
-
-  .register-professional #registerprofessional-form .fields {
-    grid-template-columns: 1fr; /* una sola columna */
+.registerclient-form {
+    grid-template-columns: 1fr; /* solo 1 columna */
   }
 
-  .register-professional #registerprofessional-form .full-width {
-    grid-column: span 1;
+  .registerclient-form .full-width {
+    grid-column: span 1; /* ocupa toda la fila en 1 columna */
   }
+ 
 
-  .register-professional .side-panel {
+  .side-panel {
+    position: static;  
     width: 100%;
+    position: static;  
     padding: 20px;
     order:1;
+    text-align: center;
   }
-};
+  }
+
   

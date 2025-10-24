@@ -16,7 +16,7 @@ function Home() {
       <h1>CONECTAMOS OFICIOS CON PERSONAS</h1>
       <p>Acercá tus servicios a quienes los necesitan, recibí consultas y generá contactos de manera simple y rápida. </p>
       <p className="text-center" ><b>¡Tu próximo cliente puede estar buscándote acá mismo!</b></p>
-      <Button to="./login-and-register/registerprofessional.html" variant="gradient" size="md">Quiero ofrecer mis servicios</Button>
+      <Button to="/register/professional" variant="gradient" size="md">Quiero ofrecer mis servicios</Button>
     </div>
     <div className="col-ms-12 col-md-12 col-lg-6">
       <img src= {imagenprincipal} alt="Grupo de profesionales de distintos oficios levantando el puño en señal de éxito" />
@@ -65,7 +65,7 @@ function Home() {
        <Button to="/register/professional" variant="dark" size="md">
   Crear mi perfil
 </Button>
-      <Button to="/login-and-register/index.html" variant="dark" size="md">Ingresar</Button>
+      <Button to="/login" variant="dark" size="md">Ingresar</Button>
       
     </div>
   </div>

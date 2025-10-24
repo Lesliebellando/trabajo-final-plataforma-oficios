@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./RegisterProfessional.css";
 import Button from "../components/Button";
 
+// 🔹 Estado inicial del formulario
 const initialForm = {
   name: "",
   surname: "",
@@ -13,59 +15,80 @@ const initialForm = {
   direccion: "",
   telefono: "",
   oficio: "",
-  otraCiudad: "",
-  otroOficio: "",
 };
 
+// 🔹 Provincias y ciudades
 const PROVINCIAS_Y_CIUDADES = {
   corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Otra"],
-  chaco: ["Resistencia", "Barranqueras", "Presidencia Roque Sáenz Peña", "Otra"],
+  chaco: ["Resistencia", "Barranqueras", "Sáenz Peña", "Otra"],
 };
 
-function RegisterProfessional() {
-  const [formData, setFormData] = useState(initialForm);
+
+
+export default function RegisterProfessional() {
+  const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
   const [ciudades, setCiudades] = useState([]);
+  const navigate = useNavigate();
 
+  // Actualiza ciudades al cambiar provincia
   useEffect(() => {
-    if (formData.provincia) {
-      setCiudades(PROVINCIAS_Y_CIUDADES[formData.provincia]);
-    } else {
-      setCiudades([]);
-    }
-  }, [formData.provincia]);
+    setCiudades(PROVINCIAS_Y_CIUDADES[form.provincia] || []);
+  }, [form.provincia]);
 
+  // Manejador de cambios
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // 🔹 Validaciones centralizadas
+  const validate = (v) => {
+    const errs = {};
+    if (!v.name.trim()) errs.name = "El nombre es obligatorio.";
+    if (!v.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email))
+      errs.email = "Email inválido.";
+    if (v.password.length < 6)
+      errs.password = "La contraseña debe tener al menos 6 caracteres.";
+    if (!v.provincia) errs.provincia = "Seleccioná una provincia.";
+    if (!v.ciudad) errs.ciudad = "Seleccioná una ciudad.";
+    if (!v.oficio) errs.oficio = "Seleccioná un oficio.";
+   
+    return errs;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const v = validate(form);
+    setErrors(v);
 
-    if (!formData.name || !formData.email || !formData.password) {
-      alert("Por favor completá todos los campos obligatorios");
-      return;
+    if (Object.keys(v).length === 0) {
+      const nuevoProfesional = { id: Date.now(), ...form, tipo: "profesional" };
+
+      // Guardar en localStorage
+      const profesionales = JSON.parse(localStorage.getItem("profesionales")) || [];
+      
+      
+      profesionales.push(nuevoProfesional);
+      
+ // Guardar como usuario activo
+      try {
+  localStorage.setItem("profesionales", JSON.stringify(profesionales));
+  localStorage.setItem("usuarioActivo", JSON.stringify(nuevoProfesional));
+} catch (error) {
+  console.error("Error al guardar en localStorage:", error);
+  alert("Hubo un problema al guardar los datos. Intenta de nuevo.");
+  return; // salimos para no navegar si falló
+}
+
+      alert("Profesional registrado con éxito ✅");
+      navigate("/myprofile");
     }
-
-    if (formData.ciudad === "Otra" && !formData.otraCiudad) {
-      alert("Por favor especificá tu ciudad");
-      return;
-    }
-
-    if (formData.oficio === "otros" && !formData.otroOficio) {
-      alert("Por favor especificá tu oficio");
-      return;
-    }
-
-    const profesionales =
-      JSON.parse(localStorage.getItem("profesionales")) || [];
-    profesionales.push(formData);
-    localStorage.setItem("profesionales", JSON.stringify(profesionales));
-
-    alert("Profesional registrado con éxito ✅");
-    setFormData(initialForm);
   };
 
+  // Función auxiliar para mostrar errores
+  const inputClass = (field) =>
+    `form-control ${errors[field] ? "is-invalid" : ""}`;
   return (
     <div className="register-professional d-flex align-items-center justify-content-center min-vh-100">
       <section className="container ">
@@ -85,88 +108,107 @@ function RegisterProfessional() {
                 
                 
 
-                <label>Nombre</label>
+                <label  htmlFor="nombre">Nombre</label>
                 <input
+                id="nombre"
                   type="text"
                   name="name"
-                  value={formData.name}
+                  value={form.name}
                   onChange={handleChange}
+                  className={inputClass("name")}
                   placeholder="Escribí tu nombre"
 
                   required
                 />
+                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
               </div>
 
               {/* Apellido */}
               <div className="col-12 col-md-6 mb-3 box">
-                <label>Apellido</label>
+                <label  htmlFor="apellido">Apellido</label>
                 <input
+                id="apellido"
                   type="text"
                   name="surname"
-                  value={formData.surname}
+                  value={form.surname}
                   onChange={handleChange}
+                  className={inputClass("surname")}
                   placeholder="Escribí tu apellido"
 
                   required
                 />
+                 {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
               </div>
 
               {/* Email */}
                             <div className= "col-12 col-md-6 mb-3 box">
 
-                <label>Email</label>
+                <label htmlFor="email">Email</label>
                 <input
+                id="email"
                   type="email"
                   name="email"
-                  value={formData.email}
+                  value={form.email}
                   onChange={handleChange}
+                  className={inputClass("email")}
                   placeholder="Correo Electrónico"
 
                   required
                 />
+                {errors.email && <div className="invalid-feedback">{errors.email}</div>}
               </div>
 
               {/* Password */}
               <div className= "col-12 col-md-6 mb-3 box">
               
-                <label>Contraseña</label>
+                <label htmlFor="password">Contraseña</label>
                 <input
+                id="password"
                   type="password"
                   name="password"
-                  value={formData.password}
+                  value={form.password}
                   onChange={handleChange}
+                   className={inputClass("password")}
                   Placeholder="Contraseña"
 
                   required
                 />
+                {errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                  )}
               </div>
 
               {/* Provincia */}
               <div className="col-12 col-md-6 mb-3 box">
-                <label>Provincia</label>
+                <label htmlFor="provincia">Provincia</label>
                 <select
-                className="form-select"
+          id="provincia"
                   name="provincia"
-                  value={formData.provincia}
+                  value={form.provincia}
                   onChange={handleChange}
+                   className={inputClass("provincia")}
                   required
                 >
                   <option value="">Seleccioná una provincia</option>
                   <option value="corrientes">Corrientes</option>
                   <option value="chaco">Chaco</option>
                 </select>
+                {errors.provincia && (
+                    <div className="invalid-feedback">{errors.provincia}</div>
+                  )}
               </div>
 
               {/* Ciudad */}
               <div className="col-12 col-md-6 mb-3 box" >
-                <label>Ciudad</label>
+                <label htmlFor="ciudad">Ciudad</label>
                 <select
-                className="form-select"
+                id="ciudad"
                   name="ciudad"
-                  value={formData.ciudad}
+                  value={form.ciudad}
                   onChange={handleChange}
                   required
-                  disabled={!formData.provincia}
+                    className={inputClass("ciudad")}
+                  disabled={!form.provincia}
                 >
                   <option value="">Seleccioná una ciudad</option>
                   {ciudades.map((ciudad, index) => (
@@ -175,6 +217,9 @@ function RegisterProfessional() {
                     </option>
                   ))}
                 </select>
+                {errors.ciudad && (
+                    <div className="invalid-feedback">{errors.ciudad}</div>
+                  )}
               </div>
 
               
@@ -182,12 +227,14 @@ function RegisterProfessional() {
 
               {/* Dirección */}
               <div className= "col-12 col-md-6 mb-3 box">
-                <label>Dirección</label>
+                <label htmlFor="direccion">Dirección</label>
                 <input
+                id="direccion"
                   type="text"
                   name="direccion"
-                  value={formData.direccion}
+                  value={form.direccion}
                   onChange={handleChange}
+                     className="form-control"
                   placeholder="Escribí tu dirección"
 
                   required
@@ -196,12 +243,14 @@ function RegisterProfessional() {
 
               {/* Teléfono */}
               <div className= "col-12 col-md-6 mb-3 box">
-                <label>Teléfono</label>
+                <label htmlFor="telefono">Teléfono</label>
                 <input
+                id="telefono"
                   type="tel"
                   name="telefono"
-                  value={formData.telefono}
+                  value={form.telefono}
                   onChange={handleChange}
+                  className="form-control"
                   placeholder="Ej: 3794123456"
                   pattern="[0-9]{10}"
                   title="Debe ingresar 10 números"
@@ -210,12 +259,13 @@ function RegisterProfessional() {
 
               {/* Oficio */}
           <div className="box full-width">
-            <label className="form-label">Oficio</label>
+            <label htmlFor="oficio">Oficio</label>
             <select
-              className="form-select"
+        id="oficio"
               name="oficio"
-              value={formData.oficio}
+              value={form.oficio}
               onChange={handleChange}
+                   className={inputClass("oficio")}
               required
             >
               <option value="">Seleccioná un oficio</option>
@@ -286,6 +336,10 @@ function RegisterProfessional() {
                 <option value="otros">Otros</option>
               </optgroup>
             </select>
+                              {errors.oficio && (
+                    <div className="invalid-feedback">{errors.oficio}</div>
+                  )}
+
           </div>
 
             <Button className='content-justify-center' type="submit" variant="gradient" size="md" fullWidth>
@@ -320,4 +374,3 @@ function RegisterProfessional() {
   );
 }
 
-export default RegisterProfessional;
