@@ -71,6 +71,36 @@ src/
 - Implementación de `useState` y `onChange` para manejar entradas.  
 - Preparación para almacenamiento en `localStorage` y simulación de sesión.  
 
+3er commit 
+Implementación de registro de profesionales y usuarios en la plataforma.
+
+Uso de React + Vite con state y useEffect para manejar formularios dinámicos.
+
+Validación de formularios con mensajes de error, tanto para campos vacíos como formato de email y longitud de contraseña.
+
+Almacenamiento de datos en localStorage:
+
+Listas separadas de profesionales y usuarios.
+
+Gestión del usuario activo para sesión persistente.
+
+Desarrollo de login único que:
+
+Permite iniciar sesión a profesionales y usuarios.
+
+Valida credenciales contra el localStorage.
+
+Redirige automáticamente al perfil correspondiente según el tipo de usuario.
+
+Uso de React Router DOM para navegación programática (navigate).
+
+Mejoras de UX/UI:
+
+Inputs con errores visibles.
+
+Formularios responsivos y botones claros para registro y login.
+
+Preparación para la futura visualización de perfiles y búsqueda de profesionales.
 ---
 
 ## 🧠 Justificación técnica
