@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.register-professional{
+font-family: 'Poppins', 'sans serif';
+ text-align: center;
+  color: #333;} 
+
+
+.row .form{background-color: #ffffff;
+border-radius: 30px;
+box-shadow: 0 0 30px #FFA725;
+padding-bottom: 20px;
+padding-top: 20px;
+margin-top: 15px;
+justify-content: center;
+
+}
+
+.row .form h2 {
+   font-size: 2rem;
+
+   font-weight: 500;
+
+}
+.register-professional h1 {
+   font-size: 2.5rem;
+
+   font-weight: 600;
+
+}
+
+
+
+.box {
+    position: relative;
+    margin: 25px 0;
+}
+    .box label {
+  display: block;
+  margin-left: 10px;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+  text-align: left; /* Para que quede alineado con el input */
+}
+.box input {
+    width: 100%;
+    padding: 13px 45px 13px 15px;
+    background-color: #FFF5E4;
+    border-radius: 8px;
+    border: none; /*duda si agrego borde o no*/
+    outline: none;
+    font-size: 1rem;
+    color:#333;
+    text-align: left;
+    font-weight: 500;
+  
+}
+
+ 
+.box input::placeholder {
+    color: #777676;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+  
+.panel {
+ font-size: 1rem;
+    padding: 10px;
+    font-weight: 500;
+    color: #333;
+   background-color: #FED16A;
+ 
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Ajustes para que se vea bien en móvil */
+@media (max-width: 768px) {
+  .panel {
+    margin-top: 1.5rem;
+  }
+}

@@ -1,0 +1,217 @@
+/* === LOGIN === */
+.login-section {
+     display: flex;
+  margin: auto;
+  padding: 0; 
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+    margin-top: 100px;   /* deja espacio para el navbar */
+  margin-bottom: 80px; /* deja espacio para el footer */
+  width: 100px;
+  max-width: 95%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 30px #FFA725;
+  overflow: hidden;
+}
+.login-box {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 90%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+  text-align: center;
+  z-index: 1;
+
+}
+
+#login-form {
+  width: 100%;
+  padding: 0 25px;
+}
+
+.login-box h1 {
+  font-size: 32px;
+  margin: 40px 0 25px;
+  font-weight: 700;
+}
+
+.box {
+  position: relative;
+  margin: 25px 0;
+}
+
+.box label {
+  display: block;
+  margin-left: 10px;
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+  text-align: left;
+}
+
+.box input {
+  width: 100%;
+  padding: 13px 45px 13px 15px;
+  background-color: #FFF5E4;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  text-align: left;
+  font-weight: 500;
+}
+
+.box input::placeholder {
+  color: #777676;
+  font-weight: 400;
+}
+
+.box i {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(0%);
+  color: #777676;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.forgot-password {
+  display: block;
+  margin: 15px 0 15px;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.forgot-password:hover {
+  color: #FFA725;
+  text-decoration: underline;
+}
+
+
+.login-section p {
+  margin: 15px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-login a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border: 2px solid #FFA725;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #333;
+  transition: 0.3s;
+}
+
+.social-login a:hover {
+  background-color: #FFA725;
+  color: #fff;
+}
+
+.icon {
+
+ margin-top: 15px;
+}
+.side-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-color: #FED16A;
+  display: flex;
+  color: #FFF5E4;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0 40px;
+  z-index: 2;
+  transition: .6s ease-in-out;
+}
+
+.side-panel h2,
+.side-panel p {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+
+
+
+a { color: #333;
+text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .login-section {
+    flex-direction: column;
+    width: 95%;
+    height: auto;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .login-box,
+  .side-panel {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .login-box {
+    padding: 20px;
+    order: 2;
+  }
+
+  .side-panel {
+    padding: 20px;
+    order: 1;
+    text-align: center;
+  }
+
+  .login-box h1 {
+    font-size: 24px;
+  }
+
+  .box input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: 14px;
+    height: 40px;
+  }
+}
+/* Ajuste para react-icons */
+.box .icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  color: #777676;
+  font-size: 18px;
+  pointer-events: none;
+}

@@ -76,6 +76,7 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   </ul>
 </li>
+<li className="nav-item"><NavLink className="nav-link" to="/myprofile">Mi Perfil</NavLink></li>
 </ul>
       </div>
       

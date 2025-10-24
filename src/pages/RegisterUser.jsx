@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./RegisterUser.css";
+import Button from "../components/Button";
 
 function RegisterUser() {
   const [formData, setFormData] = useState({
@@ -191,15 +192,40 @@ function RegisterUser() {
             />
           </div>
 
-          <button type="submit" className="btn btn-warning w-100 fw-bold">
-            Crear cuenta
-          </button>
         </form>
 
+         <Button  type="submit" variant="gradient" size="md"   fullWidth disabled={
+    !formData.name ||
+    !formData.surname ||
+    !formData.email ||
+    !formData.password ||
+    !formData.provincia ||
+    !formData.ciudad
+  }
+>
+  Crear cuenta
+</Button>
         {mensaje && <p className="mt-3 text-success">{mensaje}</p>}
+  <Button className= "text-dark" to="/" variant="outline" size="md" >Volver atrás </Button>
+
       </div>
+
+      <section className="side-panel">
+          <h2>¡Bienvenido!</h2>
+          <p>¿Ya tenés una cuenta?</p>
+          <Button to="/login" variant="gradient" size="md" fullWidth>
+            Ingresar
+          </Button>
+          <p className="mt-3">¿Querés ofrecer un servicio?</p>
+          <Button to="/registerclient" variant="gradient" size="md" fullWidth>
+            Registrate
+          </Button>
+
+
+    </section>
     </section>
   );
 }
 
 export default RegisterUser;
+ 

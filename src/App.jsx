@@ -11,6 +11,7 @@ import RegisterUser from './pages/RegisterUser'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import Button from './components/Button'
+import MiPerfil from './pages/MiPerfil'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
   <Route path='/profile/user/:id' element={<ProfileUser /> } />
   <Route path='/register/professional' element={<RegisterProfessional /> } />
   <Route path='/register/user' element={<RegisterUser /> } />
+  <Route path='/myprofile' element={<MiPerfil />} />
    
  </Routes>
     </div>

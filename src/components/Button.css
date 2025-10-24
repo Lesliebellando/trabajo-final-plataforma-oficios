@@ -19,16 +19,17 @@
 
 /* Variante gradiente */
 .btn-custom.gradient {
-  background: linear-gradient(135deg, #e37e19 0%, #ffa602 100%);
+  background: linear-gradient(135deg, #ffa602 0%, #e37e19 100%);
   color: #333;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .btn-custom.gradient:hover {
-  background: linear-gradient(135deg, beige 0%, #fff 100%);
+  background: linear-gradient(135deg, beige 0%, lemonchiffon 100% );
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   color: orange;
+  border: solid #ffa602;
 }
 
 /* Variante glass */
@@ -51,12 +52,34 @@
   font-size: 0.85rem;
 }
 
-.btn-custom.md {
-  padding: 0.6rem 1.2rem;
+/* .btn-custom.md {
+   float: none;
+  display: block;
+  justify-content: center;
+   text-align: center;
+  width: 80%;
+  height: 45px;
+  margin: 0 auto;
+    cursor: pointer;
+} */
+
+.btn-custom {
+  display: inline-block;   /* se adapta al contenido */
+  width: auto;             /* ancho automático según el texto */
+  padding: 0.5rem 1.2rem;  /* espacio interno para que no quede apretado */
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.btn-custom.lg {
+  padding: 0.5rem 1.6rem;
+
   font-size: 1rem;
 }
 
-.btn-custom.lg {
-  padding: 0.8rem 1.6rem;
-  font-size: 1.2rem;
+.btn-custom.full-width {
+  display: block;      /* ocupa toda la línea */
+  width: 100%;         /* se estira al contenedor */
+  text-align: center;  /* centra el texto */
 }
