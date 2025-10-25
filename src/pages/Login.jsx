@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import "./Login.css";
 import { FaUser, FaLock, FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
 
-export function LoginForm() {
+export default function LoginForm() {
   const [form, setForm] = useState({
     email: "",
     password: "",

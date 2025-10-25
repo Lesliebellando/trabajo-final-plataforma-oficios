@@ -36,7 +36,7 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false);
           aria-controls="navbarNav"
           aria-expanded={isOpen ? "true" : "false"}
           aria-label="Toggle navigation">
-      <spana className="navbar-toggler-icon"></spana>
+      <span className="navbar-toggler-icon"></span>
     </button>
      </div>
      <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`} id="navbarNav">
@@ -76,7 +76,7 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   </ul>
 </li>
-<li className="nav-item"><NavLink className="nav-link" to="/myprofile">Mi Perfil</NavLink></li>
+<li className="nav-item"><NavLink className="nav-link" to="/miperfil">Mi Perfil</NavLink></li>
 </ul>
       </div>
       

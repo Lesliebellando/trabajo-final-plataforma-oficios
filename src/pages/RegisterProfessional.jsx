@@ -169,7 +169,7 @@ export default function RegisterProfessional() {
                   value={form.password}
                   onChange={handleChange}
                    className={inputClass("password")}
-                  Placeholder="Contraseña"
+                  placeholder="Contraseña"
 
                   required
                 />

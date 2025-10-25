@@ -1,0 +1,59 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.nav-tabs .nav-link {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+ 
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active  {
+    font-family: 'Poppins', sans-serif;
+    color: #FED16A;
+   
+    border: solid transparent;
+   
+    cursor: pointer;
+}
+
+.form-label {
+    font-family: 'Poppins',sans-serif;
+        display: block;
+    margin-left: 10px;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
+    text-align: left;
+}
+   
+.form-control, .form-select{    width: 100%;
+    padding: 13px 45px 13px 15px;
+    background-color: #FFF5E4;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    color: #333;
+    text-align: left;
+    font-weight: 500;
+
+}
+
+
+
+@media (max-width: 768px) {
+  .perfil {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .imagen{
+    order: -1; /* la imagen va antes del contenido */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+}
