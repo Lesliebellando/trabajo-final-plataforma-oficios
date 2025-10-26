@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import Button from "../components/Button";
 import '../pages/PerfilEditable.css'
+import { useNavigate } from "react-router-dom";
 
 const provinciasCiudades = {
-  corrientes: ["Corrientes Capital", "Goya", "Paso de los Libres"],
-  chaco: ["Resistencia", "Saenz Peña", "Villa Ángela"],
+  corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Paso de los Libres", "Otra"],
+  chaco: ["Resistencia", "Barranqueras", "Saenz Peña", "Villa Ángela", "Otra"],
   
 };
-function PerfilUsuarioEditable() {
+
+
+
+export default function PerfilUsuarioEditable() {
   const [perfil, setPerfil] = useState({
     nombre: "",
     email: "",
@@ -18,6 +22,7 @@ function PerfilUsuarioEditable() {
     avatar: "",
   });
 
+ 
   // Cargar datos del usuario activo
   useEffect(() => {
     const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
@@ -40,6 +45,15 @@ function PerfilUsuarioEditable() {
     }
   };
 
+ const navigate = useNavigate();
+
+const handleLogout = () => {
+  localStorage.removeItem("usuarioActivo");
+  alert("Sesión cerrada ✅");
+  navigate("/login");
+};
+
+
   // Guardar cambios en localStorage
   const guardarCambios = () => {
     if (!perfil.nombre || !perfil.email) {
@@ -51,13 +65,16 @@ function PerfilUsuarioEditable() {
   };
 
   return (
-    <div className="container perfil-usuario mt-5">
+    <div className="container perfil-usuario mt-5 mb-5">
       <div className="row justify-content-center align-items-start">
-        
+       
         {/* FOTO DE PERFIL */}
         <div className="col-12 col-md-4 text-center mb-4">
+           <Button className= "text-dark" to="/" variant="outline" size="lg" >
+      Volver atrás
+    </Button>
           <div
-            className="imagen rounded-circle overflow-hidden border border-3 mx-auto"
+            className="imagen rounded-circle overflow-hidden border border-3 mx-auto mt-5"
             style={{ width: 120, height: 120 }}
           >
             {perfil.avatar ? (
@@ -71,6 +88,7 @@ function PerfilUsuarioEditable() {
   )}
           </div>
 
+
           <div className="d-flex justify-content-center gap-2 mt-2">
             <label className="btn btn-outline-secondary btn-sm mb-0">
               Cambiar foto
@@ -83,8 +101,10 @@ function PerfilUsuarioEditable() {
               Quitar
             </button>
           </div>
+           
         </div>
 
+    
         {/* DATOS DEL PERFIL */}
         <div className="col-12 col-md-8">
           <form className="row g-3">
@@ -201,11 +221,13 @@ function PerfilUsuarioEditable() {
 
             {/* Botón Guardar */}
             <div className="col-12 text-center mt-3 mb-5">
+               <Button onClick={() => alert("Descartado")} variant="dark" size="md">Descartar</Button>
               <Button onClick={guardarCambios} variant="gradient" size="md">Guardar cambios</Button>
-              <Button onClick={() => alert("Descartado")} variant="dark" size="md">Descartar</Button>
-              <Button className= "text-dark" to="/" variant="outline" size="sm" >
-      Volver atrás
+             
+               <Button  variant="gradient" size="lg" onClick={handleLogout}>
+      Cerrar sesión
     </Button>
+              
             </div>
           </form>
         </div>
@@ -214,4 +236,4 @@ function PerfilUsuarioEditable() {
   );
 }
 
-export default PerfilUsuarioEditable;
+ 

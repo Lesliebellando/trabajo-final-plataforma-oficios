@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { OficiosConfig } from "../components/OficiosConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./RegisterProfessional.css";
 import Button from "../components/Button";
@@ -20,7 +21,7 @@ const initialForm = {
 // 🔹 Provincias y ciudades
 const PROVINCIAS_Y_CIUDADES = {
   corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Otra"],
-  chaco: ["Resistencia", "Barranqueras", "Sáenz Peña", "Otra"],
+  chaco: ["Resistencia", "Barranqueras", "Sáenz Peña", "Villa Ángela", "Otra"],
 };
 
 
@@ -108,16 +109,16 @@ export default function RegisterProfessional() {
                 
                 
 
-                <label  htmlFor="nombre">Nombre</label>
+                <label  htmlFor= "nombre" >Nombre</label>
                 <input
-                id="nombre"
+                id= "nombre"
                   type="text"
                   name="name"
                   value={form.name}
                   onChange={handleChange}
                   className={inputClass("name")}
                   placeholder="Escribí tu nombre"
-
+autoComplete= "nombre"
                   required
                 />
                 {errors.name && <div className="invalid-feedback">{errors.name}</div>}
@@ -125,9 +126,9 @@ export default function RegisterProfessional() {
 
               {/* Apellido */}
               <div className="col-12 col-md-6 mb-3 box">
-                <label  htmlFor="apellido">Apellido</label>
+                <label  htmlFor= "apellido" >Apellido</label>
                 <input
-                id="apellido"
+                id= "apellido"
                   type="text"
                   name="surname"
                   value={form.surname}
@@ -143,16 +144,16 @@ export default function RegisterProfessional() {
               {/* Email */}
                             <div className= "col-12 col-md-6 mb-3 box">
 
-                <label htmlFor="email">Email</label>
+                <label htmlFor= "email" >Email</label>
                 <input
-                id="email"
+                id= "email"
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
                   className={inputClass("email")}
                   placeholder="Correo Electrónico"
-
+autoComplete= "email"
                   required
                 />
                 {errors.email && <div className="invalid-feedback">{errors.email}</div>}
@@ -259,87 +260,25 @@ export default function RegisterProfessional() {
 
               {/* Oficio */}
           <div className="box full-width">
-            <label htmlFor="oficio">Oficio</label>
-            <select
-        id="oficio"
-              name="oficio"
-              value={form.oficio}
-              onChange={handleChange}
-                   className={inputClass("oficio")}
-              required
-            >
-              <option value="">Seleccioná un oficio</option>
-
-              <optgroup label="Construcción y mantenimiento">
-                <option value="albanil">Albañil</option>
-                <option value="pintor">Pintor</option>
-                <option value="electricista">Electricista</option>
-                <option value="plomero-gasista">Plomero / Gasista</option>
-                <option value="carpintero">Carpintero</option>
-                <option value="herrero">Herrero / Soldador</option>
-                <option value="techista">Techista</option>
-                <option value="yesero">Yesero</option>
-                <option value="vidriero">Vidriero</option>
-                <option value="aire-acondicionado">
-                  Instalador de aire acondicionado
-                </option>
-                <option value="jardinero">Jardinero / Parquero</option>
-                <option value="otros">Otros</option>
-              </optgroup>
-
-              <optgroup label="Automotores">
-                <option value="mecanico">Mecánico automotriz</option>
-                <option value="chapista">Chapista</option>
-                <option value="pintor-autos">Pintor de autos</option>
-                <option value="gomeria">Gomería</option>
-                <option value="lavadero">Lavadero de autos</option>
-                <option value="elect-auto">Electricista del automotor</option>
-                <option value="otros">Otros</option>
-              </optgroup>
-
-              <optgroup label="Hogar y servicios personales">
-                <option value="limpieza">Limpieza / Mucama</option>
-                <option value="niniera">Niñera</option>
-                <option value="cuidado-mayores">Cuidado de adultos mayores</option>
-                <option value="cocinero">Cocinero / Panadero / Pastelero</option>
-                <option value="costurera">Costurera / Modista</option>
-                <option value="peluquero">Peluquero / Barbero</option>
-                <option value="manicura">Manicura / Pedicura</option>
-                <option value="esteticista">Esteticista</option>
-                <option value="otros">Otros</option>
-              </optgroup>
-
-              <optgroup label="Tecnología y comunicación">
-                <option value="tecnico-pc">Técnico en PC / Redes</option>
-                <option value="celulares">Reparador de celulares</option>
-                <option value="diseno-grafico">Diseñador gráfico</option>
-                <option value="fotografo">Fotógrafo</option>
-                <option value="community-manager">Community Manager</option>
-                <option value="programador">Desarrollador web / Programador</option>
-                <option value="otros">Otros</option>
-              </optgroup>
-
-              <optgroup label="Industria y producción">
-                <option value="tornero">Tornero</option>
-                <option value="textil">Operario textil</option>
-                <option value="metalurgico">Operario metalúrgico</option>
-                <option value="elect-industrial">Electricista industrial</option>
-                <option value="electromecanico">Técnico electromecánico</option>
-                <option value="otros">Otros</option>
-              </optgroup>
-
-              <optgroup label="Transporte y logística">
-                <option value="chofer">Chofer particular / remisero / taxista</option>
-                <option value="fletero">Fletero</option>
-                <option value="motoquero">Motoquero / Cadete</option>
-                <option value="repartidor">Repartidor</option>
-                <option value="otros">Otros</option>
-              </optgroup>
-            </select>
-                              {errors.oficio && (
-                    <div className="invalid-feedback">{errors.oficio}</div>
-                  )}
-
+           <select
+             id="oficio"
+             name="oficio"
+             value={form.oficio}
+             onChange={handleChange}
+             className="form-select"
+             required
+           >
+             <option value="">Seleccioná un oficio</option>
+             {Object.entries(OficiosConfig).map(([categoria, oficios]) => (
+               <optgroup key={categoria} label={categoria}>
+                 {oficios.map((o) => (
+                   <option key={o.value} value={o.value}>
+                     {o.label}
+                   </option>
+                 ))}
+               </optgroup>
+             ))}
+           </select>
           </div>
 
             <Button className='content-justify-center' type="submit" variant="gradient" size="md" fullWidth>
@@ -361,7 +300,7 @@ export default function RegisterProfessional() {
             Ingresar
           </Button>
           <p className="mt-3">¿Querés contratar un servicio?</p>
-          <Button to="/registerclient" variant="dark" size="md" fullWidth>
+          <Button to="/register/user" variant="dark" size="md" fullWidth>
             Registrate
           </Button>
     

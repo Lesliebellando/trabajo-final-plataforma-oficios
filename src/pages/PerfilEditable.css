@@ -43,14 +43,13 @@
 }
 
 
-
 @media (max-width: 768px) {
   .perfil {
     display: flex;
     flex-direction: column;
   }
 
-  .imagen{
+  .imagen {
     order: -1; /* la imagen va antes del contenido */
     display: flex;
     justify-content: center;

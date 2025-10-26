@@ -86,7 +86,7 @@ else if (values.password.length < 6) errs.password = "Mínimo 6 caracteres";
         <form id="login-form" onSubmit={handleSubmit}>
           <div className="box">
           
-            <label htmlFor="email">Correo Electrónico</label>
+            <label htmlFor= "email">Correo Electrónico</label>
             <input
               type="email"
               id="email"
@@ -94,6 +94,7 @@ else if (values.password.length < 6) errs.password = "Mínimo 6 caracteres";
               placeholder="Ingrese su email"
               value={form.email}
               onChange={handleChange}
+autoComplete="email"
               required
             />
             <FaUser className="icon" />

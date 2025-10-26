@@ -17,8 +17,8 @@ const initialFormUser = {
 
  // 🔹 Provincias y ciudades
 const PROVINCIAS_Y_CIUDADES = {
-  corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Otra"],
-  chaco: ["Resistencia", "Barranqueras", "Sáenz Peña", "Otra"],
+  corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Paso de los Libres", "Otra"],
+  chaco: ["Resistencia", "Barranqueras", "Saenz Peña", "Villa Ángela", "Otra"],
 };
 
 
@@ -100,18 +100,19 @@ try {
 
         <form className="registerclient-form" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="nombre" className="form-label">
+            <label htmlFor= "nombre" className="form-label">
               Nombre
             </label>
             <input
               type="text"
-              id="nombre"
+              id= "nombre"
               name="name"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
 
               placeholder="Ingrese su nombre"
               value={form.name}
               onChange={handleChange}
+              autoComplete="nombre"
               required
             />
              {errors.name  && <div className="invalid-feedback">{errors.name}</div>}
@@ -136,17 +137,18 @@ try {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
+            <label htmlFor= "email" className="form-label">
               Correo electrónico
             </label>
             <input
               type="email"
-              id="email"
+              id= "email"
               name="email"
                  className={inputClass("email")}
               placeholder="Ingrese su email"
               value={form.email}
               onChange={handleChange}
+              autoComplete="email"
               required
             />
             {errors.email && <div className="invalid-feedback">{errors.email}</div>}
@@ -253,7 +255,7 @@ try {
             Ingresar
           </Button>
           <p className="mt-3">¿Querés ofrecer un servicio?</p>
-          <Button to="/registerclient" variant="gradient" size="md" fullWidth>
+          <Button to="/register/professional" variant="gradient" size="md" fullWidth>
             Registrate
           </Button>
 
