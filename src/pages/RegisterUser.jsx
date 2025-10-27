@@ -15,7 +15,7 @@ const initialFormUser = {
   };
 
 
- // 🔹 Provincias y ciudades
+
 const PROVINCIAS_Y_CIUDADES = {
   corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Paso de los Libres", "Otra"],
   chaco: ["Resistencia", "Barranqueras", "Saenz Peña", "Villa Ángela", "Otra"],
@@ -33,7 +33,7 @@ export default function RegisterUser() {
     setCiudades(PROVINCIAS_Y_CIUDADES[form.provincia] || []);
   }, [form.provincia]);
 
-  // Manejador de cambios
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));

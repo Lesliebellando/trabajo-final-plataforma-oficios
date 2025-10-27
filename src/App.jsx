@@ -23,7 +23,7 @@ function App() {
   <Route path='/' element={<Home /> } />
   <Route path='/list' element={<List />} />
   <Route path='/login' element={<Login /> } />
-  <Route path='/perfil/profesional/:id' element={<PerfilProfesionalPublico/> } />
+  <Route path='/perfil/:id' element={<PerfilProfesionalPublico/> } />
 
   <Route path='/register/professional' element={<RegisterProfessional /> } />
   <Route path='/register/user' element={<RegisterUser /> } />

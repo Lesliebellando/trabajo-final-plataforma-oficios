@@ -1,13 +1,13 @@
  .registerclient-form {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* dos columnas */
+  grid-template-columns: 1fr 1fr; 
   gap: 8px 12px; 
  width: 100%;
     padding: 0 25px;
  
 }
 
-/* Inputs o botones que deben ocupar todo el ancho */
+
 .registerclient-form .full-width {
   grid-column: span 2;
   width: 100%;
@@ -61,14 +61,14 @@ overflow: hidden;}
   font-size: 15px;
   font-weight: 600;
   color: #444;
-  text-align: left; /* Para que quede alineado con el input */
+  text-align: left;
 }
 .form-control, .inputClass {
     width: 100%;
     padding: 13px 45px 13px 15px;
     background-color: #FFF5E4;
     border-radius: 8px;
-    border: none; /*duda si agrego borde o no*/
+    border: none; 
     outline: none;
     font-size: 12px;
     color:#333;
@@ -127,21 +127,21 @@ overflow: hidden;}
 }
 .registerclient-form input,
 .registerclient-form select {
-  font-size: 0.9rem;   /* más chico que el default (1rem ≈ 16px) */
-  padding: 0.5rem;     /* opcional: ajusta el padding para que no se vean desproporcionados */}
+  font-size: 0.9rem;  
+  padding: 0.5rem;   }
 
   
   
 
 
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .login-section {
-    flex-direction: column;       /* apila panel e inputs */
-    width: 95%;                   /* ocupa casi todo el ancho */
-    height: auto;                 /* deja que crezca según contenido */
-    border-radius: 20px;          /* esquinas más suaves */
+    flex-direction: column;     
+    width: 95%;                  
+    height: auto;                 
+    border-radius: 20px;          
     overflow: hidden;
   }
 
@@ -160,11 +160,11 @@ overflow: hidden;}
   align-items: center; }
 
 .registerclient-form {
-    grid-template-columns: 1fr; /* solo 1 columna */
+    grid-template-columns: 1fr; 
   }
 
   .registerclient-form .full-width {
-    grid-column: span 1; /* ocupa toda la fila en 1 columna */
+    grid-column: span 1; 
   }
  
 

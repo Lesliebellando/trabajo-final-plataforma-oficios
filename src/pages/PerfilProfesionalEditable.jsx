@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../components/Button"; // tu componente de botones
+import Button from "../components/Button"; 
 import { OficiosConfig } from "../components/OficiosConfig";
 import '../pages/PerfilEditable.css'
 import { useNavigate } from "react-router-dom";
@@ -24,7 +24,7 @@ export default function PerfilEditable() {
     skills: [],
     skillInput: "",
     certificados: [],
-    disponibilidad: [1, 2, 3, 4, 5, 6, 7], // lunes a sábado
+    disponibilidad: [1, 2, 3, 4, 5, 6, 7], 
   });
 
   const [activeTab, setActiveTab] = useState("datos");
@@ -73,17 +73,33 @@ const navigate = useNavigate();
   };
 
   const guardarCambios = () => {
-if (!perfil.nombre || !perfil.email) {
-  alert("Por favor, completá los campos obligatorios.");
-  return;
-} 
+  if (!perfil.nombre || !perfil.email) {
+    alert("Por favor, completá los campos obligatorios.");
+    return;
+  }
 
+  // Si no tiene id, le creamos uno
+  if (!perfil.id) {
+    perfil.id = Date.now();
+  }
 
-    localStorage.setItem("usuarioActivo", JSON.stringify(perfil));
-    alert("Cambios guardados ✅");
+  // Guardar usuario activo
+  localStorage.setItem("usuarioActivo", JSON.stringify(perfil));
 
-    
-  };
+  // Actualizar lista de profesionales
+  const profesionales = JSON.parse(localStorage.getItem("profesionales")) || [];
+  const index = profesionales.findIndex((p) => p.id === perfil.id);
+
+  if (index !== -1) {
+    profesionales[index] = perfil;
+  } else {
+    profesionales.push(perfil);
+  }
+
+  localStorage.setItem("profesionales", JSON.stringify(profesionales));
+
+  alert("Cambios guardados ✅");
+};
 const handleLogout = () => {
     localStorage.removeItem("usuarioActivo");
     alert("Sesión cerrada ✅");
@@ -285,9 +301,9 @@ const handleLogout = () => {
          
         </div>
 
-        {/* Columna derecha: preview */}
+
 
         
       
         </div>
-        </div> ) } 
+        </div> )  }

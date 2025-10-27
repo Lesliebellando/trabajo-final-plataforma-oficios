@@ -40,11 +40,11 @@
 }
 
 .navbar-toggler {
-  margin-left: auto; /* asegura que el botón quede a la derecha */
+  margin-left: auto;
 }
  
 .navbar-nav .nav-link {
-     white-space: nowrap;           /* mantiene todo el texto en un renglón */
+     white-space: nowrap;         
   width: auto;
   padding: 0.5rem 1rem;  
 font-family: "poppins", sans-serif;
@@ -61,9 +61,9 @@ font-size: 1rem;
   color: #e37e19;          
 }
 
-/* Link activo (NavLink agrega la clase "active" automáticamente) */
+
 .navbar-nav .nav-link.active {
-  color: #ffcc70;           /* tu color de marca */
+  color: #ffcc70;          
   font-weight: 600;
   
 }
@@ -77,7 +77,7 @@ font-family: 'Poppins', sans-serif;
 font-size: 0.8rem;
 }
 
-/* --- MÓVILES pequeños (hasta 578px): menú apilado, hamburguesa --- */
+
 @media (max-width: 767px) {
   .navbar {
     flex-wrap: wrap;
@@ -99,7 +99,7 @@ font-size: 0.8rem;
   }
 }
 
-/* --- TABLETS y pantallas medianas (579px a 991px): menú en fila --- */
+
 @media (min-width: 768px) and (max-width: 991px) {
    
   .navbar {
@@ -108,22 +108,22 @@ font-size: 0.8rem;
 
   .navbar-nav {
     flex-direction: row;
-    justify-content: space-between; /* los links se distribuyen a lo ancho */
+    justify-content: space-between; 
     align-items: center;
     width: 100%;
   }
 
   .navbar-nav .nav-item {
-    flex: 1;               /* cada link ocupa espacio igual */
-    text-align: center;    /* texto centrado */
+    flex: 1;               
+    text-align: center;   
     margin: 0;
   }
 }
 
 
-/* --- ESCRITORIO (992px en adelante) --- */
+
 @media (min-width: 992px) {
   .navbar-nav {
-    justify-content: flex-end; /* o center si preferís centrado */
+    justify-content: flex-end;
   }
 }

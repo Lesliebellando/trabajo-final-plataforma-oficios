@@ -39,7 +39,7 @@ export default function FiltroProfesionales({
         <div className="mb-3">
           <label htmlFor="provincia" className="form-label">Provincia</label>
           <select
-            id="provincia"
+            id="provincia"  
             className="form-select"
             value={provincia}
             onChange={(e) => setProvincia(e.target.value)}

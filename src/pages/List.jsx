@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { dataprofesionales } from "../data/dataprofesionales";
 import Button from "../components/Button";
 import "./List.css";
-import FiltradoLista from "../components/FiltradoLista"; // 👈 import correcto
+import FiltradoLista from "../components/FiltradoLista";
 
 export default function ProfesionalesList() {
   const [lista, setLista] = useState([]);
@@ -17,7 +17,7 @@ const handleVerMas = () => {
 
   const handleFiltrar = (e) => {
     e.preventDefault();
-    // acá ya tenés oficio, provincia y ciudad en el estado del padre
+   
   };
 
   useEffect(() => {

@@ -3,60 +3,75 @@ export const dataprofesionales = [
     id: 1,
     nombre: "María",
     apellido: "Pérez",
+    email: "maria.perez@example.com",
     provincia: "Corrientes",
     ciudad: "Corrientes Capital",
-    telefono: "3794123456",
     direccion: "Av. Independencia 1234",
-    oficio: "electricista", // coincide con el value del select
+    telefono: "5493794123456",
+    oficio: "electricista",
     descripcion: "Realizo instalaciones y mantenimiento eléctrico domiciliario.",
-    imagen: "https://placehold.co/150x150?text=Maria"
+    skills: ["Instalaciones eléctricas", "Mantenimiento preventivo", "Reparaciones urgentes"],
+    disponibilidad: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
+    imagen: "https://placehold.co/300x200?text=Maria"
   },
   {
     id: 2,
     nombre: "Juan",
     apellido: "López",
+    email: "juan.lopez@example.com",
     provincia: "Chaco",
     ciudad: "Resistencia",
-    telefono: "3624123456",
     direccion: "Calle 9 de Julio 567",
+    telefono: "5493624123456",
     oficio: "plomero-gasista",
     descripcion: "Reparo pérdidas de agua, gas y realizo instalaciones nuevas.",
-    imagen: "https://placehold.co/150x150?text=Juan"
+    skills: ["Reparación de cañerías", "Instalación de gas", "Colocación de sanitarios"],
+    disponibilidad: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+    imagen: "https://placehold.co/300x200?text=Juan"
   },
   {
     id: 3,
     nombre: "Ana",
     apellido: "Gómez",
+    email: "ana.gomez@example.com",
     provincia: "Corrientes",
     ciudad: "Goya",
-    telefono: "3794234567",
     direccion: "Mitre 890",
+    telefono: "5493794234567",
     oficio: "pintor",
     descripcion: "Pintura interior y exterior, trabajos en altura.",
-    imagen: "https://placehold.co/150x150?text=Ana"
+    skills: ["Pintura interior", "Pintura exterior", "Trabajos en altura"],
+    disponibilidad: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    imagen: "https://placehold.co/300x200?text=Ana"
   },
   {
     id: 4,
     nombre: "Carlos",
     apellido: "Méndez",
+    email: "carlos.mendez@example.com",
     provincia: "Corrientes",
     ciudad: "Corrientes Capital",
-    telefono: "3794333222",
     direccion: "Belgrano 222",
+    telefono: "5493794333222",
     oficio: "tecnico-pc",
     descripcion: "Reparación de computadoras, instalación de redes y mantenimiento.",
-    imagen: "https://placehold.co/150x150?text=Carlos"
+    skills: ["Reparación de PC", "Instalación de redes", "Mantenimiento preventivo"],
+    disponibilidad: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
+    imagen: "https://placehold.co/300x200?text=Carlos"
   },
   {
     id: 5,
     nombre: "Lucía",
     apellido: "Fernández",
+    email: "lucia.fernandez@example.com",
     provincia: "Corrientes",
     ciudad: "Paso de los Libres",
-    telefono: "3794556677",
     direccion: "San Martín 456",
+    telefono: "3794556677",
     oficio: "manicura",
     descripcion: "Servicios de manicura y pedicura a domicilio.",
-    imagen: "https://placehold.co/150x150?text=Lucia"
+    skills: ["Manicura clásica", "Pedicura spa", "Esmaltado semipermanente"],
+    disponibilidad: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    imagen: "https://placehold.co/300x200?text=Lucia"
   }
 ];

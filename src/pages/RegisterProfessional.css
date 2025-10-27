@@ -51,7 +51,7 @@ justify-content: center;
     padding: 13px 45px 13px 15px;
     background-color: #FFF5E4;
     border-radius: 8px;
-    border: none; /*duda si agrego borde o no*/
+    border: none; 
     outline: none;
     font-size: 12px;
     color:#333;
@@ -79,7 +79,7 @@ justify-content: center;
 }
 
 
-/* Ajustes para que se vea bien en móvil */
+
 @media (max-width: 768px) {
   .panel {
     margin-top: 1.5rem;
@@ -92,7 +92,7 @@ justify-content: center;
 
   }
 
-  .form-control, .inputClass {font-size: 0.9rem;   /* más chico que el default (1rem ≈ 16px) */
+  .form-control, .inputClass {font-size: 0.9rem;  
   padding: 0.5rem;   
   }
 }

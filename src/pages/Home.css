@@ -7,12 +7,12 @@
 }
 
 .hero img {
-  max-width: 100%;   /* nunca supera el ancho del contenedor */
-  height: auto;      /* mantiene la proporción */
-  display: block;    /* elimina espacios indeseados debajo */
-  margin: 0 auto;    /* opcional: centra horizontalmente */
+  max-width: 100%;   
+  height: auto;      
+  display: block;   
+  margin: 0 auto;   
   object-fit: cover; 
-  object-position: center;/* opcional: recorta si el contenedor es fijo */
+  object-position: center;
       margin-top: 40px;
       border-radius: 9px;
 }
@@ -21,8 +21,8 @@
 .home-text {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centra verticalmente dentro de su columna */
-  text-align: left; /* asegura alineación a la izquierda */
+  justify-content: center;
+  text-align: left; 
   padding: 2rem;
 }
 
@@ -65,39 +65,39 @@ padding: 30px 30px;
 }
 .card {
 
-  background: rgba(255, 255, 255, 0.15); /* efecto glass */
+  background: rgba(255, 255, 255, 0.15); 
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* sombra suave */
-  backdrop-filter: blur(10px);  /* efecto glass */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); 
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3); /* borde difuminado */
+  border: 1px solid rgba(255, 255, 255, 0.3); 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%; /* todas las cards misma altura */
+  height: 100%; 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
 }
 
-/* Hover: se eleva suavemente */
+
 .card:hover {
-  transform: translateY(-8px); /* sube un poco */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* sombra más pronunciada */
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); 
 }
 
 
 .card h3 {
   font-size: 1.4rem;
   margin-bottom: 1rem;
-  word-wrap: break-word;   /* evita que se corte el texto */
-  hyphens: auto;           /* divide palabras largas si es necesario */
-  flex-shrink: 0;          /* evita que se achique el título */
+  word-wrap: break-word;   
+  hyphens: auto;           
+  flex-shrink: 0;         
 }
 
-/* Espaciado entre cards */
+
 .features-section .card {
-  margin-bottom: 2rem;   /* espacio vertical entre filas en mobile */
+  margin-bottom: 2rem; 
 }
 
 

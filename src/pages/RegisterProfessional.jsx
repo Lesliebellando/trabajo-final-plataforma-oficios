@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./RegisterProfessional.css";
 import Button from "../components/Button";
 
-// 🔹 Estado inicial del formulario
+
 const initialForm = {
   name: "",
   surname: "",
@@ -18,7 +18,7 @@ const initialForm = {
   oficio: "",
 };
 
-// 🔹 Provincias y ciudades
+
 const PROVINCIAS_Y_CIUDADES = {
   corrientes: ["Corrientes Capital", "Goya", "Mercedes", "Ituzaingó", "Otra"],
   chaco: ["Resistencia", "Barranqueras", "Sáenz Peña", "Villa Ángela", "Otra"],
@@ -32,12 +32,12 @@ export default function RegisterProfessional() {
   const [ciudades, setCiudades] = useState([]);
   const navigate = useNavigate();
 
-  // Actualiza ciudades al cambiar provincia
+ 
   useEffect(() => {
     setCiudades(PROVINCIAS_Y_CIUDADES[form.provincia] || []);
   }, [form.provincia]);
 
-  // Manejador de cambios
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -79,7 +79,7 @@ export default function RegisterProfessional() {
 } catch (error) {
   console.error("Error al guardar en localStorage:", error);
   alert("Hubo un problema al guardar los datos. Intenta de nuevo.");
-  return; // salimos para no navegar si falló
+  return; 
 }
 
       alert("Profesional registrado con éxito ✅");
@@ -87,7 +87,7 @@ export default function RegisterProfessional() {
     }
   };
 
-  // Función auxiliar para mostrar errores
+  
   const inputClass = (field) =>
     `form-control ${errors[field] ? "is-invalid" : ""}`;
   return (
