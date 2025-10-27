@@ -30,7 +30,7 @@ function Home() {
   <div className="card-container-fluid">
     <h2>¿Por qué elegir TuOficio?</h2>
       <div className="row g-4 align-items-stretch">
-        <div className="col-sm-12 col-md-12 col-lg-4 d-flex">
+        <div className="col-sm-12 col-md-12 col-lg-4 ">
       <div className="card">
         <h3>Visibilidad inmediata</h3>
         <p>Tu perfil aparece frente a personas que buscan justo lo que ofrecés.</p>
@@ -44,7 +44,7 @@ function Home() {
       </div>
       </div>
 
-      <div className="col-sm-12 col-md-12 col-lg-4 ">
+      <div className="col-sm-12 col-md-12 col-lg-4">
          <div className="card">
         <h3>Confianza y seguridad</h3>
         <p>Perfiles verificados y reseñas para construir reputación.</p>
