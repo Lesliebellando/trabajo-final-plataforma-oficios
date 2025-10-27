@@ -103,6 +103,31 @@ Formularios responsivos y botones claros para registro y login.
 Preparación para la futura visualización de perfiles y búsqueda de profesionales.
 ---
 
+6 commit
+Avances en el Listado de Profesionales
+- Carga de datos inicial
+- Se importa dataprofesionales y se guarda en el estado lista con useEffect.
+- Estados de filtros
+- oficio, provincia y ciudad con sus respectivos setters.
+- Se pasan como props al componente FiltradoLista.
+- Componente de filtros (FiltradoLista)
+- Select de Oficio con categorías (OficiosConfig usando <optgroup>).
+- Select de Provincia dinámico a partir de la lista.
+- Select de Ciudad dependiente de la provincia seleccionada, con deduplicación de claves.
+- Filtrado dinámico
+- listaFiltrada aplica condiciones sobre oficio, provincia y ciudad.
+- Se actualiza automáticamente al cambiar los selects.
+- Renderizado de resultados
+- Cards con imagen, nombre, oficio, ciudad/provincia, descripción y botón Ver perfil.
+- Manejo de imagen por defecto si no hay foto.
+- Manejo de “sin resultados”
+- Si listaFiltrada está vacía, se muestra un alert-warning con el mensaje:
+“No se encontraron coincidencias con tu búsqueda.”
+- Paginado progresivo (“Ver más”)
+- Estado visibleCount inicial en 18.
+- Se muestran solo los primeros visibleCount resultados.
+- Botón “Ver más” que incrementa de 18 en 18.
+
 ## 🧠 Justificación técnica
 
 La decisión de utilizar **React + Vite** en lugar de HTML y CSS está basada en la necesidad de aplicar **buenas prácticas de desarrollo moderno**, como:
