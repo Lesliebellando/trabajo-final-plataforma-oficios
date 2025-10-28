@@ -35,7 +35,7 @@ El proyecto **inició con HTML, CSS y JavaScript puro**, pero posteriormente se 
 
 ## 📁 Estructura del proyecto
 
-src/
+<pre> ```markdown src/
 ├── assets/                     # Imágenes y recursos
 ├── data/                       # Carpeta de datos (por ejemplo, listas o JSON simulados)
 │   └── dataProfesionales.jsx   # Datos iniciales de profesionales
@@ -56,9 +56,8 @@ src/
 │   ├── RegisterProfessional.jsx
 │   └── RegisterUser.jsx
 ├── App.jsx                      # Rutas y estructura general del proyecto
-└── main.jsx                     # Punto de entrada principal
-markdown
-Copiar código
+└── main.jsx``` </pre>
+
 
 ---
 
@@ -131,14 +130,17 @@ Estas mejoras permiten comprender el **flujo de datos** en aplicaciones modernas
 
 Para ejecutar el proyecto localmente:
 
-```bash
+- Clonar el repositorio
+git clone https://github.com/tuusuario/nombre-del-repo.git
+cd nombre-del-repo
+- Instalar dependencias
 npm install
+- Ejecutar en modo desarrollo
 npm run dev
-
-Luego abrir en el navegador la URL indicada en la consola (por defecto):
+- Luego abrir en el navegador la URL indicada en la consola (por defecto):
 👉 http://localhost:5173/
 
 🌐 Enlace al proyecto
 
 🔗 Deploy en GitHub Pages:
-https://lesliebellando.github.io/tp-final-react-leslie-bellando/
+[Enlace al Proyecto](https://lesliebellando.github.io/tp-final-react-leslie-bellando/)
