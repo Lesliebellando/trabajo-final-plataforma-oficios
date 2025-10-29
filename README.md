@@ -143,4 +143,4 @@ npm run dev
 🌐 Enlace al proyecto
 
 🔗 Deploy en GitHub Pages:
-[Enlace al Proyecto](https://lesliebellando.github.io/tp-final-react-leslie-bellando/)
+[Enlace al Proyecto](https://lesliebellando.github.io/trabajo-final-plataforma-oficios/)
