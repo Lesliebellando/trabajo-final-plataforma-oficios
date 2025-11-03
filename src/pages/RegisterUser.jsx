@@ -5,13 +5,15 @@ import "./RegisterUser.css";
 import Button from "../components/Button";
 
 const initialFormUser = {
-    name: "",
-    surname: "",
+    nombre: "",
+    apellido: "",
     email: "",
     password: "",
     provincia: "",
     ciudad: "",
     telefono: "",
+    serviciosBuscados: "",
+    role: "usuario",
   };
 
 
@@ -42,7 +44,8 @@ export default function RegisterUser() {
  // 🔹 Validaciones centralizadas
   const validate = (v) => {
     const errs = {};
-    if (!v.name.trim()) errs.name = "El nombre es obligatorio.";
+    if (!v.nombre.trim()) errs.nombre = "El nombre es obligatorio.";
+    if (!v.apellido.trim()) errs.apellido = "El apellido es obligatorio.";
     if (!v.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email))
       errs.email = "Email inválido.";
     if (v.password.length < 6)
@@ -62,7 +65,7 @@ export default function RegisterUser() {
     setErrors(v);
 
     if (Object.keys(v).length === 0) {
-      const nuevoUsuario = { id: Date.now(), ...form, tipo: "usuario"};
+      const nuevoUsuario = { id: Date.now(), ...form, role: "usuario"};
 
  // Guardar en localStorage
 let usuarios = [];
@@ -86,7 +89,7 @@ try {
 }
 
       alert("Usuario registrado con éxito ✅");
-      navigate("/myprofile");
+      navigate("/miperfil");
     }
   };
     
@@ -106,16 +109,16 @@ try {
             <input
               type="text"
               id= "nombre"
-              name="name"
-            className={`form-control ${errors.email ? "is-invalid" : ""}`}
+              name="nombre"
+            className={`form-control ${errors.nombre ? "is-invalid" : ""}`}
 
               placeholder="Ingrese su nombre"
-              value={form.name}
+              value={form.nombre}
               onChange={handleChange}
               autoComplete="nombre"
               required
             />
-             {errors.name  && <div className="invalid-feedback">{errors.name}</div>}
+             {errors.nombre  && <div className="invalid-feedback">{errors.nombre}</div>}
 
           </div>
 
@@ -126,17 +129,17 @@ try {
             <input
               type="text"
               id="apellido"
-              name="surname"
-           placeholder="Ingrese su apellido"
-              className={inputClass("surname")}
-              value={form.surname}
+              name="apellido"
+              placeholder="Ingrese su apellido"
+              className={inputClass("apellido")}
+              value={form.apellido}
               onChange={handleChange}
               required
             />
-             {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
+             {errors.apellido && <div className="invalid-feedback">{errors.apellido}</div>}
           </div>
 
-          <div className="mb-3">
+          <div className="mb-3 ">
             <label htmlFor= "email" className="form-label">
               Correo electrónico
             </label>
@@ -237,14 +240,27 @@ try {
             />
           </div>
 
-        </form>
-
-         <Button  type="submit" variant="gradient" size="md" 
+      
+<div className="full-width text-center mt-4">
+  <Button type="submit" variant="gradient" size="md">
+    Crear cuenta
+  </Button>
+  <Button
+  to="/"
+  variant="outline"
+  size="md"
+  className="text-dark"
 >
-  Crear cuenta
+  Volver atrás
 </Button>
 
-  <Button className= "text-dark" to="/" variant="outline" size="md" >Volver atrás </Button>
+</div>
+
+
+        </form>
+
+
+  
 
       </div>
 

@@ -7,8 +7,9 @@ import Button from "../components/Button";
 
 
 const initialForm = {
-  name: "",
-  surname: "",
+   avatar: "",
+  nombre: "",
+  apellido: "",
   email: "",
   password: "",
   provincia: "",
@@ -16,6 +17,9 @@ const initialForm = {
   direccion: "",
   telefono: "",
   oficio: "",
+  skills: [],        
+  disponibilidad: [],
+    role: "profesional",
 };
 
 
@@ -46,7 +50,8 @@ export default function RegisterProfessional() {
   // 🔹 Validaciones centralizadas
   const validate = (v) => {
     const errs = {};
-    if (!v.name.trim()) errs.name = "El nombre es obligatorio.";
+    if (!v.nombre.trim()) errs.nombre = "El nombre es obligatorio.";
+    if (!v.apellido.trim()) errs.apellido = "El apellido es obligatorio.";
     if (!v.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email))
       errs.email = "Email inválido.";
     if (v.password.length < 6)
@@ -64,7 +69,7 @@ export default function RegisterProfessional() {
     setErrors(v);
 
     if (Object.keys(v).length === 0) {
-      const nuevoProfesional = { id: Date.now(), ...form, tipo: "profesional" };
+      const nuevoProfesional = { id: Date.now(), ...form, role: "profesional" };
 
       // Guardar en localStorage
       const profesionales = JSON.parse(localStorage.getItem("profesionales")) || [];
@@ -83,7 +88,7 @@ export default function RegisterProfessional() {
 }
 
       alert("Profesional registrado con éxito ✅");
-      navigate("/myprofile");
+      navigate("/miperfil");
     }
   };
 
@@ -97,7 +102,7 @@ export default function RegisterProfessional() {
         {/* Caja del formulario */}
         <div className=" row justify-content-center align-items-center flex-column mt-5">
            <h1>¡Bienvenido!</h1>
-          <div className="professional ccol-12 col-md-10 col-lg-8">
+          <div className="professional col-12 col-md-10 col-lg-8">
           
           <form id="registerprofessional-form" onSubmit={handleSubmit}>
         
@@ -113,15 +118,15 @@ export default function RegisterProfessional() {
                 <input
                 id= "nombre"
                   type="text"
-                  name="name"
-                  value={form.name}
+                  name="nombre"
+                  value={form.nombre}
                   onChange={handleChange}
-                  className={inputClass("name")}
+                  className={inputClass("nombre")}
                   placeholder="Escribí tu nombre"
-autoComplete= "nombre"
+                  autoComplete= "given-name"
                   required
                 />
-                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                {errors.nombre && <div className="invalid-feedback">{errors.nombre}</div>}
               </div>
 
               {/* Apellido */}
@@ -130,15 +135,15 @@ autoComplete= "nombre"
                 <input
                 id= "apellido"
                   type="text"
-                  name="surname"
-                  value={form.surname}
+                  name="apellido"
+                  value={form.apellido}
                   onChange={handleChange}
-                  className={inputClass("surname")}
+                  className={inputClass("apellido")}
                   placeholder="Escribí tu apellido"
 
                   required
                 />
-                 {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
+                 {errors.apellido&& <div className="invalid-feedback">{errors.apellido}</div>}
               </div>
 
               {/* Email */}
@@ -235,7 +240,7 @@ autoComplete= "email"
                   name="direccion"
                   value={form.direccion}
                   onChange={handleChange}
-                     className="form-control"
+                   className={inputClass("direccion")}
                   placeholder="Escribí tu dirección"
 
                   required
@@ -251,7 +256,7 @@ autoComplete= "email"
                   name="telefono"
                   value={form.telefono}
                   onChange={handleChange}
-                  className="form-control"
+                 className={inputClass("telefono")}
                   placeholder="Ej: 3794123456"
                   pattern="[0-9]{10}"
                   title="Debe ingresar 10 números"
