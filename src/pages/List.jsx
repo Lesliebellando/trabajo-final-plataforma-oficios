@@ -100,4 +100,5 @@ const handleVerMas = () => {
   </div>
 </div>
 </div>
-</div> ) }
+</div> ); 
+}

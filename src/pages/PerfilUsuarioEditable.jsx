@@ -14,12 +14,14 @@ const provinciasCiudades = {
 export default function PerfilUsuarioEditable() {
   const [perfil, setPerfil] = useState({
     nombre: "",
+    apellido: "",
     email: "",
     telefono: "",
     provincia: "",
     ciudad: "",
     serviciosBuscados: "",
-    avatar: "",
+    role: "usuario",
+  
   });
 
  
@@ -60,9 +62,18 @@ const handleLogout = () => {
       alert("Por favor, completá los campos obligatorios (nombre y email).");
       return;
     }
+ const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const index = usuarios.findIndex((u) => u.id === perfil.id);
+  if (index !== -1) {
+    usuarios[index] = perfil;
+  } else {
+    usuarios.push(perfil);
+  }
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
     localStorage.setItem("usuarioActivo", JSON.stringify(perfil));
     alert("Cambios guardados ✅");
-  };
+    };
 
   return (
     <div className="container perfil-usuario mt-5 mb-5">

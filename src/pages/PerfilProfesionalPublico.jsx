@@ -45,9 +45,12 @@ export default function PerfilProfesionalPublico() {
   }
 const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-const numeroWhatsApp = profesional.telefono.startsWith("549")
-  ? profesional.telefono
-  : "549" + profesional.telefono.replace(/^0/, "");
+const numeroWhatsApp = profesional.telefono
+  ? (profesional.telefono.startsWith("549")
+      ? profesional.telefono
+      : "549" + profesional.telefono.replace(/^0/, ""))
+  : "";
+
 
    return (
     <div className="container mt-5">
@@ -189,21 +192,23 @@ const numeroWhatsApp = profesional.telefono.startsWith("549")
 
 
 
-                    <Button
-                      variant="success"
-                      size="md"
-                      onClick={() =>
-                        window.open(
-                          `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(
-                            "Hola, quiero solicitar un presupuesto."
-                          )}`,
-                          "_blank",
-                          "noopener,noreferrer"
-                        )
-                      }
-                    >
-                      Pedir presupuesto
-                    </Button>
+                   <Button
+  variant="success"
+  size="md"
+  disabled={!numeroWhatsApp}
+  onClick={() =>
+    window.open(
+      `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(
+        "Hola, quiero solicitar un presupuesto."
+      )}`,
+      "_blank",
+      "noopener,noreferrer"
+    )
+  }
+>
+  Pedir presupuesto
+</Button>
+
 
                     <Button
                       variant="dark"

@@ -69,7 +69,7 @@ else if (values.password.length < 6) errs.password = "Mínimo 6 caracteres";
         return;
       }
 
-    navigate("/myprofile");
+    navigate("/miperfil");
 } else {
   setErrors({ email: "Correo o contraseña incorrectos" });
 }
@@ -77,13 +77,14 @@ else if (values.password.length < 6) errs.password = "Mínimo 6 caracteres";
   }
 }
 
-
   return (
     <section className="login-section">
       <div className="login-box">
         <h1>Ingresa a tu cuenta</h1>
 
         <form id="login-form" onSubmit={handleSubmit}>
+          {errors.general && <div className="alert alert-danger">{errors.general}</div>}
+
           <div className="box">
           
             <label htmlFor= "email">Correo Electrónico</label>

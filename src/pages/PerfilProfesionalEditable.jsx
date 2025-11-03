@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../components/Button"; 
 import { OficiosConfig } from "../components/OficiosConfig";
 import '../pages/PerfilEditable.css'
@@ -19,12 +19,14 @@ export default function PerfilEditable() {
     email: "",
     telefono: "",
     oficio: "",
-    zona: "",
+     provincia: "",
+  ciudad: "",
     descripcion: "",
     skills: [],
     skillInput: "",
-    certificados: [],
-    disponibilidad: [1, 2, 3, 4, 5, 6, 7], 
+    
+    disponibilidad: [], 
+      role: "profesional",
   });
 
   const [activeTab, setActiveTab] = useState("datos");
@@ -79,21 +81,21 @@ const navigate = useNavigate();
   }
 
   // Si no tiene id, le creamos uno
-  if (!perfil.id) {
-    perfil.id = Date.now();
-  }
+  const perfilConId = perfil.id ? perfil : { ...perfil, id: Date.now() };
+setPerfil(perfilConId);
+
 
   // Guardar usuario activo
-  localStorage.setItem("usuarioActivo", JSON.stringify(perfil));
+  localStorage.setItem("usuarioActivo", JSON.stringify(perfilConId));
 
   // Actualizar lista de profesionales
   const profesionales = JSON.parse(localStorage.getItem("profesionales")) || [];
-  const index = profesionales.findIndex((p) => p.id === perfil.id);
+  const index = profesionales.findIndex((p) => p.id === perfilConId.id);
 
   if (index !== -1) {
-    profesionales[index] = perfil;
+    profesionales[index] = perfilConId;
   } else {
-    profesionales.push(perfil);
+    profesionales.push(perfilConId);
   }
 
   localStorage.setItem("profesionales", JSON.stringify(profesionales));
@@ -105,6 +107,17 @@ const handleLogout = () => {
     alert("Sesión cerrada ✅");
     navigate("/login");
   };
+
+  const descartarCambios = () => {
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+  if (usuarioActivo) setPerfil(usuarioActivo);
+};
+
+  useEffect(() => {
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+  if (usuarioActivo) setPerfil(usuarioActivo);
+}, []);
+
 
   return (
     <div className="container py-4">
@@ -265,7 +278,14 @@ const handleLogout = () => {
                 <div className="d-flex flex-wrap gap-2">
                   {perfil.skills.map((s, idx) => (
                     <span key={idx} className="badge bg-primary">
-                      {s} <button className="btn btn-sm btn-light ms-1" onClick={() => removeSkill(s)}>x</button>
+                      {s} <button 
+      type="button" 
+      className="btn btn-sm btn-light ms-1" 
+      onClick={() => removeSkill(s)}
+    >
+      x
+    </button>
+
                     </span>
                   ))}
                 </div>
@@ -290,7 +310,7 @@ const handleLogout = () => {
 
             <div className="mt-4 gap-2">
 
-              <Button onClick={() => alert("Descartado")} variant="dark" size="md">Descartar</Button>
+            <Button onClick={descartarCambios} variant="dark" size="md">Descartar</Button>
               <Button onClick={guardarCambios} variant="gradient" size="md">Guardar cambios</Button>
              
 <Button className="btn-cerrar-sesion" variant="gradient" size="md" onClick={handleLogout}>Cerrar sesión</Button>
